@@ -1,26 +1,87 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// import logo from "./logo.svg";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+// const keys= ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"];
+
+const sounds = [
+  {
+    key:'Q',
+    mp3: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3',
+  },
+  {
+    key:'W',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3',
+  },
+  {
+    key:'E',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3',
+  },
+  {
+    key:'A',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3',
+  },
+  {
+    key:'S',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3',
+  },
+  {
+    key:'D',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3',
+  },
+  {
+    key:'Z',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3',
+  },
+  {
+    key:'X',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3',
+  },
+  {
+    key:'C',
+    mp3:'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3',
+  }
+]
+
+
+const App =()=> (
+  <div id="display" className="display">
+    {sounds.map((sound, idx) => (
+      <Box text={sound.key} key={idx} audio={sound.mp3} />
+    ))}
+  </div>
+);  
+  
+
+class Box extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.audio = React.createRef();
+
+    window.document.addEventListener('keydown', (e) =>{
+      if (e.key.toUpperCase() === props.text) {
+        this.audio.current.play();
+      }
+    })
+  }
+
+  playSound = () => {
+    console.log(this.audio.current);
+    this.audio.current.play();
+  }
+
+
+  render(){
+    const {text,audio}=this.props;
+    return(
+      <div className="box active" onClick={this.playSound}>
+        {text}
+        <audio ref={this.audio} src={audio} className="clip" id={text} />
+      </div>
+    ); 
+  }
+} 
 
 export default App;

@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+body{
+  background-color: #006266;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh; 
+}
+.display{
+  background-color: #C4E538;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 350px;
+  border-radius: 4%;
+  box-shadow: 2px 2px 5px black;
+  
+}
+.box {
+  background-color: #1B1464;
+  color: aliceblue;
+  border: 2px solid #1B1464;
+  border-radius: 4%;
+  font-size: 30px;
+  font-family: 'Metal Mania', cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100px;
+  margin: 5px;
+}
+.box.active:hover {
+  opacity: 0.97;
+  box-shadow: 5px black;
+  transform: scale(1.08);
+
+}
